@@ -1,0 +1,20 @@
+@RestController
+@RequestMapping("/api/import/eleves")
+public class ImportEleveController {
+
+    @Autowired
+    private EleveService eleveService;
+
+    @PostMapping
+    public List<Eleve> importEleves(@RequestParam("file") MultipartFile file) throws IOException {
+        // parse le fichier CSV et crée les objets Eleve à partir des informations du fichier
+        List<Eleve> eleves = parseCsvFile(file);
+        // enregistre les élèves en base de données
+        return eleveService.saveAll(eleves);
+    }
+
+    private List<Eleve> parseCsvFile(MultipartFile file) throws IOException {
+        // parse le fichier CSV et retourne une liste d'objets Eleve
+        // ...
+    }
+}
